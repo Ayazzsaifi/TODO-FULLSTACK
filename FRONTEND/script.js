@@ -9,7 +9,7 @@ loginBtn.addEventListener("click",async function(e){
     e.preventDefault()
     const email=emailInput.value;
     const password=passwordInput.value;
-    const response= await axios.post("http://localhost:3000/signin",{email,password})
+    const response= await axios.post("https://todo-fullstack-cjkf.onrender.com",{email,password})
     localStorage.setItem( "token",response.data.token)
     window.location.href="todo.html"
 });
@@ -19,7 +19,7 @@ signUpbtn.addEventListener("click",async function(e){
     const email=emailInput.value;
     const password=passwordInput.value
     const name=nameInput.value
-    const response=await axios.post("http://localhost:3000/signup",{email,password,name})
+    const response=await axios.post("https://todo-fullstack-cjkf.onrender.com",{email,password,name})
     alert("Signup successful! Please login.")
     emailInput.value="";
     passwordInput.value="";
