@@ -9,9 +9,11 @@ const JWT_SECRET = process.env.JWT_SECRET
 app.use(express.json());
 // will add a zod library in this 
 const {z}=require("zod");
-
+const cors=require("cors")
 
 mongoose.connect(process.env.MONGO_URI)
+
+app.use(cors());
 
 app.post("/signup", async function (req, res) {
 
@@ -79,9 +81,7 @@ app.post("/signin", async function (req, res) {
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password)
-
-    console.log(user);
-
+    
     if (passwordMatch) {
         const token = jwt.sign({
             id: user._id.toString()
