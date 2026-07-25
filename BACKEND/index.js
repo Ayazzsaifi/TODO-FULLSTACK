@@ -128,16 +128,16 @@ app.get("/todos", auth,async function (req, res) {
 
 
 function auth(req, res, next) {
-    const token = req.headers.token
-    const decodedData = jwt.verify(token, JWT_SECRET);
-
-    if (decodedData) {
-        req.userId = decodedData.id;
-        next();
-    }
-    else {
+    try {
+        const token = req.headers.token
+        const decodedData = jwt.verify(token, JWT_SECRET);
+        if (decodedData) {
+            req.userId = decodedData.id;
+            next();
+        }
+    } catch(e) {
         res.status(403).json({
-            err: "incorrect credintials"
+            err: "incorrect credentials"
         })
     }
 }
